@@ -3,37 +3,37 @@ const questions=[
     {
         question:"First question",
         answers:[
-            {text:"first ans", correct:false},
-            {text:"correct ans", correct:true},
-            {text:"second ans", correct:false},
-            {text:"third ans", correct:false},
+            {text:"1 first ans", correct:false},
+            {text:"1 correct ans", correct:true},
+            {text:"1 second ans", correct:false},
+            {text:"1 third ans", correct:false},
         ]
     },
     {
         question:"Second question",
         answers:[
-            {text:"first ans", correct:false},
-            {text:"correct ans", correct:true},
-            {text:"second ans", correct:false},
-            {text:"third ans", correct:false},
+            {text:"2 first ans", correct:false},
+            {text:"2 correct ans", correct:true},
+            {text:"2 second ans", correct:false},
+            {text:"2 third ans", correct:false},
         ]
     },
     {
         question:"third question",
         answers:[
-            {text:"first ans", correct:false},
-            {text:"correct ans", correct:true},
-            {text:"second ans", correct:false},
-            {text:"third ans", correct:false},
+            {text:"3 first ans", correct:false},
+            {text:"3 correct ans", correct:true},
+            {text:"3 second ans", correct:false},
+            {text:"3 third ans", correct:false},
         ]
     },
     {
         question:"fourth question",
         answers:[
-            {text:"first ans", correct:false},
-            {text:"correct ans", correct:true},
-            {text:"second ans", correct:false},
-            {text:"third ans", correct:false},
+            {text:"4 first ans", correct:false},
+            {text:"4 correct ans", correct:true},
+            {text:"4 second ans", correct:false},
+            {text:"4 third ans", correct:false},
         ]
     }
 ];
@@ -43,13 +43,19 @@ let qustionsElement=document.querySelector(".question");
 let answerBtn=document.querySelectorAll(".btn");
 let answerBtn1=document.querySelector(".btn");
 let nextBtn=document.querySelector(".nxt-btn");
+let scoreBoard=document.querySelector(".score-board");
+let currentquestionindex=0;
+let score=0;
 
 function displayQuestion() {
-    qustionsElement.innerText=questions.question;
+    let cquestion=questions[currentquestionindex];
+    let questionNo=currentquestionindex+1;
+    qustionsElement.innerText=questionNo+". "+cquestion.question;
     answerBtn.forEach((elem,i)=>{
-          elem.innerText=questions[i].answers[i].text;
+        let canswer=questions[currentquestionindex].answers[i];
+          elem.innerText=canswer.text;
           elem.addEventListener('click',()=>{
-            if(questions[i].answers[i].correct===true){
+            if(canswer.correct===true){
                 nextBtn.style.display = "block";
             }
             else{
@@ -57,24 +63,25 @@ function displayQuestion() {
             }
           });
     })
+    nextBtn.style.display = "none";
+    scoreBoard.innerText='Your Score is '+score;
+}
+
+function addNextQuestion() {
+    currentquestionindex++;
+    score++;
+    if (currentquestionindex < questions.length) {
+        displayQuestion();
+   }else{
+           scoreBoard.innerText='Your Score is '+score;
+   }
+   
 }
 
 nextBtn.addEventListener('click',()=>{
-
-
+    if (currentquestionindex < questions.length) {
+         addNextQuestion();
+    }    
 });
-
-
-// answerBtn1.addEventListener("click" , ()=>{
-//       for (let i = 0; i < questions.length; i++) {
-//         const c = questions[i].answers[i].correct;
-//         if(c[i] === true){
-//             nextBtn.style.display = "block";
-//             console.log("truew");
-//         }else{
-//             console.log("error");
-//         }
-//       }    
-// })
 
 displayQuestion();
