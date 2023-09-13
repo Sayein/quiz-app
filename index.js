@@ -35,13 +35,11 @@ const questions=[
             {text:"4 second ans", correct:false},
             {text:"4 third ans", correct:false},
         ]
-    }
+    },
 ];
-
 
 let qustionsElement=document.querySelector(".question");
 let answerBtn=document.querySelectorAll(".btn");
-let answerBtn1=document.querySelector(".btn");
 let nextBtn=document.querySelector(".nxt-btn");
 let scoreBoard=document.querySelector(".score-board");
 let currentquestionindex=0;
@@ -54,26 +52,31 @@ function displayQuestion() {
     answerBtn.forEach((elem,i)=>{
         let canswer=questions[currentquestionindex].answers[i];
           elem.innerText=canswer.text;
-          elem.addEventListener('click',()=>{
+          elem.addEventListener('click',function highLightCorrectAnswer(){
             if(canswer.correct===true){
                 nextBtn.style.display = "block";
+                elem.classList.add('correct');
+                elem.removeEventListener('click',highLightCorrectAnswer);
+                elem.disabled=true;
             }
             else{
-                  console.log("error");
+                nextBtn.style.display = "block";
+                elem.classList.add('incorrect');
+                elem.disabled=true;
             }
           });
+          elem.classList.remove('correct');
+          elem.classList.remove('incorrect');
+          elem.disabled=false;
     })
+    
     nextBtn.style.display = "none";
-    scoreBoard.innerText='Your Score is '+score;
 }
 
 function addNextQuestion() {
     currentquestionindex++;
-    score++;
     if (currentquestionindex < questions.length) {
         displayQuestion();
-   }else{
-           scoreBoard.innerText='Your Score is '+score;
    }
    
 }
@@ -84,4 +87,4 @@ nextBtn.addEventListener('click',()=>{
     }    
 });
 
-displayQuestion();
+displayQuestion();   

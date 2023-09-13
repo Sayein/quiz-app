@@ -7,3 +7,15 @@
 .nxt-btn{
     display: none;
 }
+
+.correct, .active{
+    background-color: greenyellow;
+}
+
+.incorrect{
+    background-color: red;
+}
+
+.score-board{
+    display: none;
+}
