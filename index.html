@@ -9,15 +9,17 @@
 <body>
     <div class="main">
         <div class="center">
-            <div class="score-board"></div>
-            <div class="question">This your question?</div>
+            <div class="quiz-box">
+            <div class="question-counter">1/4</div>
+            <h1><span class="question-number">1.</span><span class="question">This your question?</span></h1>
             <div class="ans-btn">
-                <button class="btn">Answer 1</button>
-                <button class="btn">Answer 2</button>
-                <button class="btn">Answer 3</button>
-                <button class="btn">Answer 4</button>
+                <button class="btn" data-click="unclicked">Answer 1</button>
+                <button class="btn" data-click="unclicked">Answer 2</button>
+                <button class="btn" data-click="unclicked">Answer 3</button>
+                <button class="btn" data-click="unclicked">Answer 4</button>
             </div>
             <button class="nxt-btn">Next</button>
+        </div>
         </div>
     </div>
 <script src="index.js"></script>
